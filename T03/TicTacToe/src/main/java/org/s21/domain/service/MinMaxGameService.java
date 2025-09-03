@@ -19,7 +19,7 @@ public class MinMaxGameService implements GameService {
 
   private record Move(Coordinate coordinate, int score) {}
 
-  private int checkLine (int a, int b, int c) {
+  private Integer checkLine (int a, int b, int c) {
     return (a != Config.VOID_FIELD && a == b && a == c) ? a : Config.VOID_FIELD;
   }
 
@@ -43,7 +43,6 @@ public class MinMaxGameService implements GameService {
       return new Move(null, 10);
     } else if (winner == Config.HUMAN_PLAYER) {
       return new Move(null, -10);
-//    } else if (possibleMoves.isEmpty()) {
     } else if (winner == Config.DRAW) {
       return new Move(null, 0);
     }
@@ -90,12 +89,12 @@ public class MinMaxGameService implements GameService {
     int count = 0;
     for (int i = 0; i < Config.BOARD_SIZE; ++i) {
       for (int j = 0; j < Config.BOARD_SIZE; ++ j) {
-        if (oldGameBoard.getCell(i, j) != 0) {
+        if (oldGameBoard.getCell(i, j) != Config.VOID_FIELD) {
           if (oldGameBoard.getCell(i, j) != newGameBoard.getCell(i, j)) {
             return false;
           }
         } else {
-          if (newGameBoard.getCell(i, j) != 0) {
+          if (newGameBoard.getCell(i, j) != Config.VOID_FIELD) {
             count++;
           }
         }
@@ -105,7 +104,7 @@ public class MinMaxGameService implements GameService {
   }
 
   @Override
-  public int endGame(GameBoard gameBoard) {
+  public Integer endGame(GameBoard gameBoard) {
     int winner;
     for (int i = 0; i < Config.BOARD_SIZE; ++i) {
       winner = checkLine(gameBoard.getCell(i, 0),  gameBoard.getCell(i, 1), gameBoard.getCell(i, 2));

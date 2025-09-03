@@ -9,7 +9,7 @@ public interface GameService {
 
   boolean isValid(Game newGame);
 
-  int endGame(GameBoard gameBoard);
+  Integer endGame(GameBoard gameBoard);
 
   Game newGame(int startPlayer);
 }

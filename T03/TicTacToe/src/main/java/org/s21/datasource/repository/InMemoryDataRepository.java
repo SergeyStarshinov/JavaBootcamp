@@ -5,7 +5,7 @@ import org.s21.datasource.model.Storage;
 
 import java.util.UUID;
 
-public class InMemoryDataRepository extends DataRepository {
+public class InMemoryDataRepository implements DataRepository {
 
   private final Storage storage;
 

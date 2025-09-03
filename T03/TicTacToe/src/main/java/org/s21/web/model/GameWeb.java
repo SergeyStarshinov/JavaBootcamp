@@ -29,12 +29,4 @@ public class GameWeb {
     this.statusMessage = statusMessage;
   }
 
-  @Override
-  public String toString() {
-    return "GameWeb{" +
-        "uuid=" + uuid +
-        ", gameBoard=" + gameBoard +
-        ", statusMessage='" + statusMessage + '\'' +
-        '}';
-  }
 }

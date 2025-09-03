@@ -3,11 +3,11 @@ package org.s21.datasource.repository;
 import org.s21.datasource.model.GameData;
 import java.util.UUID;
 
-public abstract class DataRepository {
+public interface DataRepository {
 
-  public abstract void saveGame(GameData game);
+  void saveGame(GameData game);
 
-  public abstract GameData loadGame(UUID uuid);
+  GameData loadGame(UUID uuid);
 
-  public abstract void deleteGame(UUID uuid);
+  void deleteGame(UUID uuid);
 }

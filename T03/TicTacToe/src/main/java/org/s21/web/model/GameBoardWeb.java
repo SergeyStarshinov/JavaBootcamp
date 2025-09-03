@@ -9,10 +9,6 @@ public class GameBoardWeb {
     this.gameBoard = new char[Config.BOARD_SIZE][Config.BOARD_SIZE];
   }
 
-  public char getCell(int row, int col) {
-    return gameBoard[row][col];
-  }
-
   public void setCell(int row, int col, char val) {
     gameBoard[row][col] = val;
   }

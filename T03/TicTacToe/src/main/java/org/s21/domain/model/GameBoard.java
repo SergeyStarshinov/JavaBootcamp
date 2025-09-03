@@ -8,7 +8,7 @@ public class GameBoard implements Cloneable{
   private int[][] gameBoard;
 
   public GameBoard() {
-    gameBoard = new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+    gameBoard = new int[Config.BOARD_SIZE][Config.BOARD_SIZE];
   }
 
   public int getCell(int row, int col) {
@@ -43,16 +43,6 @@ public class GameBoard implements Cloneable{
     catch (CloneNotSupportedException e) {
       throw new AssertionError();
     }
-  }
-
-  public GameBoard copy() {
-    GameBoard copyBoard = new GameBoard();
-    for (int i = 0; i < Config.BOARD_SIZE; ++i) {
-      for (int j = 0; j < Config.BOARD_SIZE; ++ j) {
-        copyBoard.setCell(i, j, gameBoard[i][j]);
-      }
-    }
-    return copyBoard;
   }
 
 }

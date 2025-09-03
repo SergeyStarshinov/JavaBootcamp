@@ -6,7 +6,6 @@ import org.s21.domain.model.Game;
 import org.s21.domain.service.GameService;
 import org.s21.web.mapper.WebMapper;
 import org.s21.web.model.GameWeb;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -18,11 +17,14 @@ public class WebController {
   public record Coordinates (int row, int col) {
   }
 
-  @Autowired
-  private GameService gameService;
+  private final GameService gameService;
 
-  @Autowired
-  private DatasourceService datasourceService;
+  private final DatasourceService datasourceService;
+
+  public WebController(GameService gameService, DatasourceService datasourceService) {
+    this.gameService = gameService;
+    this.datasourceService = datasourceService;
+  }
 
   @GetMapping("/new_game_player")
   public GameWeb newGamePlayer() {
@@ -43,12 +45,16 @@ public class WebController {
     int row = coordinates.row;
     int col = coordinates.col;
     Game game = datasourceService.loadGame(uuid);
-    GameWeb result = WebMapper.fromGameToGameWeb(game);
+    GameWeb result;
 
-    if (game.getGameBoard() == null) {
+    if (game.getGameBoard() != null) {
+      result = WebMapper.fromGameToGameWeb(game);
+    } else {
+      result = WebMapper.fromGameToGameWeb(new Game());
       result.setStatusMessage("Game with ID = " + uuid + " not found");
       return result;
     }
+
     if (row < 0 || col < 0 || row >= Config.BOARD_SIZE || col >= Config.BOARD_SIZE){
       result.setStatusMessage("Incorrect move coordinates");
       return result;
